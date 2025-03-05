@@ -1,129 +1,74 @@
 #include <SoftwareSerial.h>           // 소프트웨어 시리얼 라이브러리
-
 #include <DFRobot_TFmini.h>           // 라이다 센서 라이브러리
-
 #include <Servo.h>                    // 서보 모터 라이브러리  
-
 #include <Adafruit_TCS34725.h>        // 컬러 센서 사용을 위한 라이브러리8
 
 
 
-
-
 SoftwareSerial SerialL45(10,11);          // 라이다 왼쪽 45 // Serial Left 45
-
 SoftwareSerial SerialL30(12,13);          // 라이다 왼쪽 30 // Serial Left 30
-
 SoftwareSerial SerialR45(50,51);          // 라이다 오른쪽 45 // Serial Right 45
-
 SoftwareSerial SerialR30(52,53);          // 라이다 오른쪽 30 // Serial Right 30
-
 SoftwareSerial SerialF(A8,A9);            // 라이다 전면 // Serial Front
 
 
 
 DFRobot_TFmini TFminiL45;            // Left 45
-
 DFRobot_TFmini TFminiL30;            // Left 30
-
 DFRobot_TFmini TFminiR45;            // Right 45
-
 DFRobot_TFmini TFminiR30;            // Right 30
-
 DFRobot_TFmini TFminiF;              // Front
-
 
 
 Servo servo; 
 
 
-
 uint16_t distF;                      // Front Distance
-
 uint16_t distL45,distL30;            // Left Distance
-
 uint16_t distR45,distR30;            // Right Distance
-
 uint16_t dist;                       // 거리 상수, 거리값
-
 uint16_t a[20];                      // 길이가 10인 a배열 - 오른쪽
-
 uint16_t b[20];                      // 길이가 10인 b배열 - 왼쪽
 
 
-
-
-
 int servoPin = 8;                    // 서보 모터 통신 핀
-
 int angle = 0;                       // 서보 모터 각도 
-
 int but01 = 9;                       // 탐지 버튼
-
 int butSignal;                       // 버튼 신호 // 버튼이 눌렸을때 HIGH값 출력
-
 int motorL = 4;                      // 왼쪽 진동모터
-
 int motorR = 5;                      // 오른쪽 진동모터
-
 int motorT = 6;                      // 상단 진동모터
-
 int buzzer = 7;                      // 부저
-
 int trig = 3;                        // 초음파 트리거
-
 int echo = 2;
-
 int distU;                           // 초음파 탐지거리 // Ultra sound Distance
-
 int x;                               // 배열 변수
-
 int standL2, standL1;                // 왼쪽 2의 갯수, 1의 갯수
-
 int standR2, standR1;                // 오른쪽 2의 갯수, 1의 갯수
-
 int sum, sum01, sum02;               // 거릿값 차이, map()함수 변형값
-
 int highR, highL;                    // 라이다 오른쪽, 왼쪽 거리차이 
-
-
 float duration;
-
 
 
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X); // 객체선언
 
 
 
-
-
-
-
-
-
 void setup() 
 { 
   Serial.begin(115200);                  //아두이노 통신속도 
-    TFminiF.begin(SerialF);              // 라이다 라이브러리 시작 (소프트 시리얼) // 라이브러리와 소프트 시리얼 구속
-    TFminiL45.begin(SerialL45); 
-    TFminiL30.begin(SerialL30);  
-    TFminiR45.begin(SerialR45);   
-    TFminiR30.begin(SerialR30);
-
-
+  TFminiF.begin(SerialF);              // 라이다 라이브러리 시작 (소프트 시리얼) // 라이브러리와 소프트 시리얼 구속
+  TFminiL45.begin(SerialL45); 
+  TFminiL30.begin(SerialL30);  
+  TFminiR45.begin(SerialR45);   
+  TFminiR30.begin(SerialR30);
 
   pinMode(but01, INPUT);
-  
   pinMode(trig,OUTPUT); 
-
-  pinMode(echo, INPUT);
-    
-  pinMode(motorR, OUTPUT);
-  
-  pinMode(motorL, OUTPUT);
-  
-  pinMode(motorT, OUTPUT);
-  
+  pinMode(echo, INPUT);    
+  pinMode(motorR, OUTPUT);  
+  pinMode(motorL, OUTPUT);  
+  pinMode(motorT, OUTPUT);  
   pinMode(buzzer, OUTPUT);
 
 }
