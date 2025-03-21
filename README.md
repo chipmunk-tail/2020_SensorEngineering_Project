@@ -6,6 +6,12 @@
 
 <img src="src_img/title.png" alt="smart_stick" width="500">
 
+### 보고서
+- [프로젝트 종합 보고서](./docs/20201202_센서공학_종합보고서.pdf)
+- [프로젝트 수행 결과 보고서](./docs/1반%202조%20과제%20수행%20결과%20보고서.pdf)
+
+<br/>
+
 ### 유튜브 링크(클릭하면 넘어갑니다!)
 
 [![Video Label](http://img.youtube.com/vi/T-CXTw1Zunw/0.jpg)](https://youtu.be/T-CXTw1Zunw)
